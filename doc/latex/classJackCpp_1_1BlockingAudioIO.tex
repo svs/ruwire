@@ -1,0 +1,203 @@
+\section{JackCpp::BlockingAudioIO Class Reference}
+\label{classJackCpp_1_1BlockingAudioIO}\index{JackCpp::BlockingAudioIO@{JackCpp::BlockingAudioIO}}
+This is an class that provides a blocking read/write interface for Jack.  
+
+
+{\tt \#include $<$jackblockingaudioio.hpp$>$}
+
+Inheritance diagram for JackCpp::BlockingAudioIO::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{classJackCpp_1_1BlockingAudioIO}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{CompactItemize}
+\item 
+{\bf BlockingAudioIO} (std::string name, unsigned int inChans=2, unsigned int outChans=2, unsigned int inBufSize=0, unsigned int outBufSize=0, bool startServer=true)  throw (std::runtime\_\-error)
+\begin{CompactList}\small\item\em The Constructor. \item\end{CompactList}\item 
+void {\bf write} (unsigned int channel, jack\_\-default\_\-audio\_\-sample\_\-t val)
+\begin{CompactList}\small\item\em Write to an output buffer. \item\end{CompactList}\item 
+bool {\bf tryWrite} (unsigned int channel, jack\_\-default\_\-audio\_\-sample\_\-t val)
+\begin{CompactList}\small\item\em Try to write to an output buffer. \item\end{CompactList}\item 
+jack\_\-default\_\-audio\_\-sample\_\-t {\bf read} (unsigned int channel)
+\begin{CompactList}\small\item\em Read from an input buffer. \item\end{CompactList}\item 
+bool {\bf tryRead} (unsigned int channel, jack\_\-default\_\-audio\_\-sample\_\-t \&val)
+\begin{CompactList}\small\item\em Try to read from to an input buffer. \item\end{CompactList}\item 
+virtual void {\bf reserveOutPorts} (unsigned int num)  throw (std::runtime\_\-error)\label{classJackCpp_1_1BlockingAudioIO_1b09d9affd9bb29739ea054694947318}
+
+\begin{CompactList}\small\item\em This method is useless at the moment. \item\end{CompactList}\item 
+virtual void {\bf reserveInPorts} (unsigned int num)  throw (std::runtime\_\-error)\label{classJackCpp_1_1BlockingAudioIO_5e1b9306c6875be6d71ba4c5ea9d905f}
+
+\begin{CompactList}\small\item\em This method is useless at the moment. \item\end{CompactList}\item 
+virtual unsigned int {\bf addInPort} (std::string name)  throw (std::runtime\_\-error)
+\begin{CompactList}\small\item\em Add an input port to our client. \item\end{CompactList}\item 
+virtual unsigned int {\bf addOutPort} (std::string name)  throw (std::runtime\_\-error)
+\begin{CompactList}\small\item\em Add an output port to our client. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Protected Member Functions}
+\begin{CompactItemize}
+\item 
+virtual int {\bf audioCallback} (jack\_\-nframes\_\-t nframes, std::vector$<$ jack\_\-default\_\-audio\_\-sample\_\-t $\ast$ $>$ inBufs, std::vector$<$ jack\_\-default\_\-audio\_\-sample\_\-t $\ast$ $>$ outBufs)
+\begin{CompactList}\small\item\em This is the callback that processes our buffers. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+This is an class that provides a blocking read/write interface for Jack. 
+
+This class has read/write methods that allow users to write audio to and read audio from a Jack client.
+
+\begin{Desc}
+\item[Author:]Alex Norman \end{Desc}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{JackCpp::BlockingAudioIO@{JackCpp::BlockingAudioIO}!BlockingAudioIO@{BlockingAudioIO}}
+\index{BlockingAudioIO@{BlockingAudioIO}!JackCpp::BlockingAudioIO@{JackCpp::BlockingAudioIO}}
+\subsubsection[BlockingAudioIO]{\setlength{\rightskip}{0pt plus 5cm}JackCpp::BlockingAudioIO::BlockingAudioIO (std::string {\em name}, \/  unsigned int {\em inChans} = {\tt 2}, \/  unsigned int {\em outChans} = {\tt 2}, \/  unsigned int {\em inBufSize} = {\tt 0}, \/  unsigned int {\em outBufSize} = {\tt 0}, \/  bool {\em startServer} = {\tt true})  throw (std::runtime\_\-error)}\label{classJackCpp_1_1BlockingAudioIO_c4758d16d467f2e502947971fa61f744}
+
+
+The Constructor. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em name}]string indicating the name of the jack client to create \item[{\em inChans}]an unsigned integer indicating the number of default input ports to create \item[{\em outChans}]an unsigned integer indicating the number of default output ports to create \item[{\em inBufSize}]the size of the buffer that the jack callback fills for us to read with read \item[{\em outBufSize}]the size of the buffer that we write to and the jack callback reads from \item[{\em startServer}]a boolean indicating whether to start a jack server if one isn't already running \end{description}
+\end{Desc}
+\begin{Desc}
+\item[See also:]\doxyref{AudioIO::AudioIO}{p.}{classJackCpp_1_1AudioIO_8047a04f80a018a791cdaa12a114e28b} \end{Desc}
+
+
+\subsection{Member Function Documentation}
+\index{JackCpp::BlockingAudioIO@{JackCpp::BlockingAudioIO}!write@{write}}
+\index{write@{write}!JackCpp::BlockingAudioIO@{JackCpp::BlockingAudioIO}}
+\subsubsection[write]{\setlength{\rightskip}{0pt plus 5cm}void JackCpp::BlockingAudioIO::write (unsigned int {\em channel}, \/  jack\_\-default\_\-audio\_\-sample\_\-t {\em val})}\label{classJackCpp_1_1BlockingAudioIO_8bb05a49bae61bb054da2f8639be63d7}
+
+
+Write to an output buffer. 
+
+Writes val to the output[channel] (if it exists). If output[channel] does not exist is silently fails otherwise it sleeps until it can write output[channel]
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em channel}]the output chanel to write to \item[{\em val}]the value to write to the channel \end{description}
+\end{Desc}
+\begin{Desc}
+\item[See also:]\doxyref{tryWrite(unsigned int channel, jack\_\-default\_\-audio\_\-sample\_\-t val)}{p.}{classJackCpp_1_1BlockingAudioIO_4136ce81b071d9baf24ff7c7588041d6} \end{Desc}
+\index{JackCpp::BlockingAudioIO@{JackCpp::BlockingAudioIO}!tryWrite@{tryWrite}}
+\index{tryWrite@{tryWrite}!JackCpp::BlockingAudioIO@{JackCpp::BlockingAudioIO}}
+\subsubsection[tryWrite]{\setlength{\rightskip}{0pt plus 5cm}bool JackCpp::BlockingAudioIO::tryWrite (unsigned int {\em channel}, \/  jack\_\-default\_\-audio\_\-sample\_\-t {\em val})}\label{classJackCpp_1_1BlockingAudioIO_4136ce81b071d9baf24ff7c7588041d6}
+
+
+Try to write to an output buffer. 
+
+Trys to write to output[channel] (if it exists). If it succeeds it returns true. If it fails, because the buffer is full, it returns false.
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em channel}]the output chanel to write to \item[{\em val}]the value to write to the channel \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]true if it can write, false if it cannot \end{Desc}
+\begin{Desc}
+\item[See also:]\doxyref{write(unsigned int channel, jack\_\-default\_\-audio\_\-sample\_\-t val)}{p.}{classJackCpp_1_1BlockingAudioIO_8bb05a49bae61bb054da2f8639be63d7} \end{Desc}
+\index{JackCpp::BlockingAudioIO@{JackCpp::BlockingAudioIO}!read@{read}}
+\index{read@{read}!JackCpp::BlockingAudioIO@{JackCpp::BlockingAudioIO}}
+\subsubsection[read]{\setlength{\rightskip}{0pt plus 5cm}jack\_\-default\_\-audio\_\-sample\_\-t JackCpp::BlockingAudioIO::read (unsigned int {\em channel})}\label{classJackCpp_1_1BlockingAudioIO_3c3de9375d02b89fe78bb02248892a28}
+
+
+Read from an input buffer. 
+
+Reads from input[channel] if it exists. If there is no input to read it sleeps until there is.
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em channel}]the input chanel to read from \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]the value read from the input channel [will be zero if the channel does not exist] \end{Desc}
+\begin{Desc}
+\item[See also:]\doxyref{tryRead(unsigned int channel, jack\_\-default\_\-audio\_\-sample\_\-t \&val)}{p.}{classJackCpp_1_1BlockingAudioIO_acbd1a89baa01aeeee40df130ea9be09} \end{Desc}
+\index{JackCpp::BlockingAudioIO@{JackCpp::BlockingAudioIO}!tryRead@{tryRead}}
+\index{tryRead@{tryRead}!JackCpp::BlockingAudioIO@{JackCpp::BlockingAudioIO}}
+\subsubsection[tryRead]{\setlength{\rightskip}{0pt plus 5cm}bool JackCpp::BlockingAudioIO::tryRead (unsigned int {\em channel}, \/  jack\_\-default\_\-audio\_\-sample\_\-t \& {\em val})}\label{classJackCpp_1_1BlockingAudioIO_acbd1a89baa01aeeee40df130ea9be09}
+
+
+Try to read from to an input buffer. 
+
+Trys to read from input[channel] (if it exists). If it succeeds it returns true. If it fails, because the buffer is empty, it returns false.
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em channel}]the output chanel to read from \item[{\em val}]the value to read into (basically a return value) \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]true if it can read, false if it cannot \end{Desc}
+\begin{Desc}
+\item[See also:]\doxyref{read(unsigned int channel)}{p.}{classJackCpp_1_1BlockingAudioIO_3c3de9375d02b89fe78bb02248892a28} \end{Desc}
+\index{JackCpp::BlockingAudioIO@{JackCpp::BlockingAudioIO}!addInPort@{addInPort}}
+\index{addInPort@{addInPort}!JackCpp::BlockingAudioIO@{JackCpp::BlockingAudioIO}}
+\subsubsection[addInPort]{\setlength{\rightskip}{0pt plus 5cm}virtual unsigned int JackCpp::BlockingAudioIO::addInPort (std::string {\em name})  throw (std::runtime\_\-error)\hspace{0.3cm}{\tt  [virtual]}}\label{classJackCpp_1_1BlockingAudioIO_38b71581513ffd8ff894e22cfd5a433e}
+
+
+Add an input port to our client. 
+
+Unlike \doxyref{AudioIO}{p.}{classJackCpp_1_1AudioIO}, this currently cannot be called while the client is running.
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em name}]string the name of the port to add \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]the number of total input ports \end{Desc}
+\begin{Desc}
+\item[See also:]\doxyref{AudioIO::addInPort(std::string name)}{p.}{classJackCpp_1_1AudioIO_e4012b8cf09dccc0a77e52920b05aaf2} \end{Desc}
+
+
+Reimplemented from {\bf JackCpp::AudioIO} \doxyref{}{p.}{classJackCpp_1_1AudioIO_e4012b8cf09dccc0a77e52920b05aaf2}.\index{JackCpp::BlockingAudioIO@{JackCpp::BlockingAudioIO}!addOutPort@{addOutPort}}
+\index{addOutPort@{addOutPort}!JackCpp::BlockingAudioIO@{JackCpp::BlockingAudioIO}}
+\subsubsection[addOutPort]{\setlength{\rightskip}{0pt plus 5cm}virtual unsigned int JackCpp::BlockingAudioIO::addOutPort (std::string {\em name})  throw (std::runtime\_\-error)\hspace{0.3cm}{\tt  [virtual]}}\label{classJackCpp_1_1BlockingAudioIO_e5af09bc21fdd4a3ce0110b4f07be480}
+
+
+Add an output port to our client. 
+
+Unlike \doxyref{AudioIO}{p.}{classJackCpp_1_1AudioIO}, this currently cannot be called while the client is running.
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em name}]string the name of the port to add \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]the number of total output ports \end{Desc}
+\begin{Desc}
+\item[See also:]\doxyref{AudioIO::addOutPort(std::string name)}{p.}{classJackCpp_1_1AudioIO_483ceea4739df186a941d6bac2c3c1d1} \end{Desc}
+
+
+Reimplemented from {\bf JackCpp::AudioIO} \doxyref{}{p.}{classJackCpp_1_1AudioIO_483ceea4739df186a941d6bac2c3c1d1}.\index{JackCpp::BlockingAudioIO@{JackCpp::BlockingAudioIO}!audioCallback@{audioCallback}}
+\index{audioCallback@{audioCallback}!JackCpp::BlockingAudioIO@{JackCpp::BlockingAudioIO}}
+\subsubsection[audioCallback]{\setlength{\rightskip}{0pt plus 5cm}virtual int JackCpp::BlockingAudioIO::audioCallback (jack\_\-nframes\_\-t {\em nframes}, \/  std::vector$<$ jack\_\-default\_\-audio\_\-sample\_\-t $\ast$ $>$ {\em inBufs}, \/  std::vector$<$ jack\_\-default\_\-audio\_\-sample\_\-t $\ast$ $>$ {\em outBufs})\hspace{0.3cm}{\tt  [protected, virtual]}}\label{classJackCpp_1_1BlockingAudioIO_417710fe1a00020b63464c65aaef46c5}
+
+
+This is the callback that processes our buffers. 
+
+This method takes the buffers we write to with \char`\"{}write\char`\"{} and writes them out to the Jack bus. It also takes audio from the Jack bus and uses that to fill the input buffers that we read from.
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em nframes}]the number frames to process \item[{\em inBufs}]a vector of audio buffers \item[{\em outBufs}]a vector of audio buffers \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]the actual number of frames processed \end{Desc}
+
+
+Implements {\bf JackCpp::AudioIO} \doxyref{}{p.}{classJackCpp_1_1AudioIO_4fb8fd43ec3c2b3d589d29abdf22d3a3}.
+
+The documentation for this class was generated from the following file:\begin{CompactItemize}
+\item 
+jackblockingaudioio.hpp\end{CompactItemize}
