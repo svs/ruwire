@@ -512,11 +512,3 @@ std::vector<std::string> JackCpp::AudioIO::getPortConnections (std::string portN
 	return portNames;
 
 }
-
-int JackCpp::AudioIO::disconnectPorts(const char * srcPortName, const char * destPortName) {
-  return jack_disconnect(mJackClient,srcPortName,destPortName);
-}
-
-int JackCpp::AudioIO::connectPorts(const char * srcPortName, const char * destPortName) {
-  return jack_connect(mJackClient,srcPortName,destPortName);
-}

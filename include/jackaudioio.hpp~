@@ -256,8 +256,6 @@ In that method you can get audio in from jack and write it out to jack.
 			std::vector<std::string> getAllPortNames();
 			jack_port_t *getPort(std::string portName);
 			std::vector<std::string> getPortConnections (std::string portName);
-                        int disconnectPorts(const char * srcPortName, const char *destPortName);
-                        int connectPorts(const char * srcPortName, const char *destPortName);
 			/**
 			 	@brief This method is called when Jack shuts down.
 				Override if you want to do something when jack shuts down.

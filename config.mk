@@ -12,7 +12,7 @@ LIBS = -L${PREFIX}/lib -L/usr/lib
 #CFLAGS = -Wall -O3 -I. -I./include/ -I${PREFIX}/include -I/usr/include `pkg-config --cflags jack`
 CFLAGS = -Wall -O3 -I. -I./include/ -I${PREFIX}/include -I/usr/include
 #LDFLAGS = ${LIBS} `pkg-config --libs jack`
-LDFLAGS = ${LIBS} -ljack -lpthread -lrt
+LDFLAGS = ${LIBS} -ljack -lpthread -lrt -j
 
 AR = ar cr
 CC = g++

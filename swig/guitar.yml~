@@ -1,0 +1,9 @@
+name: Guitar
+required:
+  - rakarrack
+  - rosegarden
+connections:
+  "system:capture_1" : "rakarrack:in_1"
+  "system:capture_1" : "rakarrack:in_2"
+  "rakarrack:out_1" : "rosegarden: master in L"
+  "rakarrack:out_2" : "rosegarden: master in R"

@@ -58,6 +58,19 @@ int main(){
 	t->addInPort("blahin0");		// add new in port (2) named "blahin0"
 	t->addInPort("blahin1");		// add new in port (3) named "blahin1"
 	t->start();	// activate the client
+	cout << "Getting port names" << endl;
+	std::vector<std::string> portNames = t->getAllPortNames();
+	for (int i=0; i<int (portNames.size());i++) {
+	  cout << "Getting connections for :" << portNames[i] << endl;
+	  std::vector<std::string> portConnections = t->getPortConnections(portNames[i]);
+	  if (!portConnections.empty()) {
+	  	for (int i=0; i<int (portConnections.size());i++) {
+	    	cout << portConnections[i] << endl;
+	  	}
+	  }
+	}
+	
+	
 
 	// reporting some client info
 	cout << endl << "my name: " << t->getName() << endl;
