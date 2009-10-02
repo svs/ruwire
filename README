@@ -1,48 +1,15 @@
-jackcpp version 0.3.1
-A C++ class wrapping most of the jack client functionality, a "blocking"
-interface for jack and a template class wrapping the jack ring buffer.  There
-is also a swig interface generator for making scripting interfaces for the
-blockingaudioio class.
+Ruwire is a patchbay and connection handler for Jack clients and is extension of Alex Norman's excellent jackcpp (http://www.x37v.info/jack_cpp/). Alex has very helpfully provided a SWIG interface to Ruby, and I have taken advantage of this to extend the ruby interface to jack.
 
-by Alex Norman alex@x37v.info
+Configurations can be stored in yml files. Please check guitar.yml in swig/ directory for an example.
 
-Works with Linux, Will Wolcott tested with OSX.  Everything works fine except
-it seems that there is a bug in the jack implementation that causes crashes
-when jack_client_open (called in the constructor) starts a jack server.  It
-seems that the OSX version doesn't pause the jack_client_open thread while
-starting the server, so calls to jack_connect cause crashes after the server is
-automatically started.  Basically, you should start a jack server before you
-start your jack clients if you are OSX.
+The Ruwire class usage is very simple.
 
-REQUIREMENTS
-	Jack and its development headers.
-	Swig to generate swig wrappers.
+require 'ruwire'
+r = Ruwire.new
+r.load("guitar")
 
-DOCUMENTATION
-	There are doxygen automatically generated docs in doc/
+INSTALL
+To install, please read "README_jackcpp". Basically you have to run "make ruby", then go into swig directory and read ruwire.rb and wire.rb. Then, run wire.rb from the swig directory. Make sure jack server is running. wire.rb should start rakarrack and rosegarden if they are installed and will then connect them based on the connections in the YML file.
 
-SWIG scripting interfaces.
-	see the example script files in the swig directory.
 
-BUILD instructions
-
-Edit config.mk to reflect your system setup.
-
-To build:
-	make
-
-To install:
-	sudo make install
-
-To make tests:
-	make test
-
-To make ruby swig interface:
-	make ruby
-
-To make lua swig interface:
-	make lua
-
-To make python swig interface:
-	make python
 
