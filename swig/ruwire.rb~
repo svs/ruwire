@@ -40,26 +40,28 @@ class Ruwire
     required.children.each do |c|
       puts "checking for #{c.value}"
       if  not clientExists?(c.value)
+        puts "not found....running #{c.value}"
         exec "#{c.value}" if fork.nil?
       end
-      puts "waiting for all clients to connect"
-      all_connected = false
-      while (all_connected != true) do
-        sleep(3)
-        all_connected = true
-        required.children.each do |c|
-          if not clientExists?(c.value)
-            puts "waiting for #{c.value}"
-            all_connected = false
-          end
+    end
+    puts "waiting for all clients to connect"
+    all_connected = false
+    while (all_connected != true) do
+      sleep(3)
+      all_connected = true
+      required.children.each do |c|
+        if not clientExists?(c.value)
+          puts "waiting for #{c.value}"
+          all_connected = false
         end
       end
-      puts "making appropriate connections"
-      connections = y.select('connections')[0]
-      connections.value.keys.each do |k|
-        puts "connecting #{k.value} to #{connections.value[k].value}"
-        connect(k.value,connections.value[k].value)
-      end
+    end
+    puts "making appropriate connections"
+    disconnectAll
+    connections = y.select('connections')[0]
+    connections.value.keys.each do |k|
+      puts "connecting #{k.value} to #{connections.value[k].value}"
+      connect(k.value,connections.value[k].value)
     end
   end
 end

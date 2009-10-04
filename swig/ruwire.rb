@@ -9,7 +9,9 @@ class Ruwire
   end
 
   def getAllPortNames
-    @jack.getAllPortNames
+    puts "getting port names..."
+    sleep(0.01)
+    portNames = @jack.getAllPortNames
   end
   
   def disconnectAll
@@ -31,10 +33,18 @@ class Ruwire
   end
 
   def clientExists?(clientName)
-    @jack.getAllPortNames.select{|p| p =~ /#{clientName}/}.size > 0
+    puts "...still checking"
+    portNames = @jack.getAllPortNames
+    puts "...got port names"
+    x = portNames
+    
+    rv = portNames.select{|p| p =~ /#{clientName}/}.size > 0
+    puts "done"
+    rv
   end
 
   def load(fileName)
+    puts "loading yaml file: #{fileName}.yaml"
     y = YAML.parse(File.read("#{fileName}.yml"))
     required = y.select('required')[0]
     required.children.each do |c|
@@ -47,7 +57,6 @@ class Ruwire
     puts "waiting for all clients to connect"
     all_connected = false
     while (all_connected != true) do
-      sleep(3)
       all_connected = true
       required.children.each do |c|
         if not clientExists?(c.value)
@@ -55,6 +64,7 @@ class Ruwire
           all_connected = false
         end
       end
+      sleep(0.00000000000001) #boing....another strange bug
     end
     puts "making appropriate connections"
     disconnectAll
