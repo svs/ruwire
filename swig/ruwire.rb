@@ -10,7 +10,7 @@ class Ruwire
 
   def getAllPortNames
     puts "getting port names..."
-    sleep(0.01)
+    sleep(0.01) #strange bug
     portNames = @jack.getAllPortNames
   end
   
